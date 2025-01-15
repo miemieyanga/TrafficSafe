@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <!-- <meta name="description"
+    content="We introduce LargeSceneModel, which utilizes two unposed and uncalibrated images as input, and reconstructs the explicit radiance field, encompassing geometry, appearance, and semantics in real-time.">
+  <meta property="og:title" content="Large Scene Model: Real-time Unposed Images to Semantic 3D" />
+  <meta property="og:description" content="Novel view synthesis via feed-forward 3D Gaussian inference from two images." /> -->
+  <!-- <meta property="og:url" content="https://pixelsplat.github.io/" />
+  <meta property="og:image" content="https://pixelsplat.github.io/static/images/banner.png" /> -->
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- <meta name="twitter:title" content="Large Scene Model: Real-time Unposed Images to Semantic 3D"> -->
+  <!-- <meta name="twitter:description" content="Novel view synthesis via feed-forward 3D Gaussian inference from two images."> -->
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <!-- <meta name="twitter:image" content="https://pixelsplat.github.io/static/images/banner.png"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- Keywords for your paper to be indexed by-->
+  <!-- <meta name="keywords" content="NeRF, novel view synthesis, 3D Gaussians"> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+  <title>TrafficSafe</title>
+
+
+
+
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+
+  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script> -->
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+  <link rel="stylesheet" href="assets/css/bog/app.css">
+
+  <link rel="stylesheet" href="assets/css/bog/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+
+  <link rel="stylesheet" href="assets/css/bog/dics.min.css">
+  <script src="assets/js/bog/dics.min.js"></script>
+  <script src="assets/js/bog/video_comparison.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', domReady);
+    function domReady() {
+      for (const e of document.querySelectorAll(".b-dics")) {
+        new Dics({
+          container: e,
+          textPosition: "top"
+        });
+      }
+    }
+  </script>
+</head>
+
+<style>
+  .before,
+  .after {
+    margin: 0;
+  }
+
+  .summary-box {
+    background-color: #B8CFEA;
+    /* Light blue background */
+    /* border-left: 5px solid #2b8af7; Dark blue left border */
+    padding: 20px;
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+    border-radius: 5px;
+    /* Rounds the corners */
+    border: 2px solid #91A0C9;
+    /* Fine orange border */
+  }
+
+  p {
+    margin: 0;
+    color: #333;
+    /* Dark text for better readability */
+  }
+
+  .before figcaption,
+  .after figcaption {
+    background: #fff;
+    border: 1px solid #c0c0c0;
+    border-radius: 4px;
+    color: #2e3452;
+    opacity: 0.8;
+    padding: 4px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 70%;
+  }
+
+  .before figcaption {
+    left: 4px;
+  }
+
+  .after figcaption {
+    right: 4px;
+  }
+</style>
+
+
+<body>
+
+  <div class="container">
+    <!-- Title -->
+    <!-- <h1 class="pt-5 title is-3" style="font-size: 34px;">Learn Traffic <span style="color: #D80725 ;font-weight: bolder;"></span>Crash</span> as Language —— <br> Datasets, Benchmarks and What-if Causal Analysis</h1> -->
+    <h1 class="pt-5 title">Customizing Foundation Models for Reliable and Interpretable Traffic Crash Prediction and
+      Safety Interventions</h1>
+
+    <!-- <div class="d-flex flex-row justify-content-center">
+      <a>Anonymous Authors</a>
+    </div> -->
+
+
+    <div class="w-100 d-flex flex-row justify-content-center mt-4 gap-2">
+      <!-- Paper PDF -->
+      <a href="https://arxiv.com/" target="_blank" class="btn btn-dark" role="button">
+        <span class="icon">
+          <i class="ai ai-arxiv"></i>
+        </span>
+        <span>Paper</span>
+      </a>
+
+      <!-- Code -->
+      <a href="https://github.com/Puw242/TrafficSafe" target="_blank" class="btn btn-dark" role="button">
+        <span class="icon">
+          <i class="fab fa-github"></i>
+        </span>
+        <span>Code</span>
+      </a>
+
+      <!-- Pre-trained Models -->
+      <!-- <a href="https://drive.google.com/drive/folders/18nGNWIn8RN0aEWLR6MC2mshAkx2uN6fL?usp=sharing" target="_blank" class="btn btn-dark" role="button">
+        <span class="icon">
+          <i class="fas fa-database"></i>
+        </span>
+        <span>Pre-trained Models</span>
+      </a> -->
+
+      <!-- Sample Data -->
+      <a href="https://github.com/Puw242/TrafficSafe" target="_blank" class="btn btn-dark" role="button">
+        <span class="icon">
+          <i class="fas fa-database"></i>
+        </span>
+        <span>Dataset</span>
+      </a>
+    </div>
+
+
+    <!-- </section> -->
+    <div class="columns is-centered has-text-centered">
+      <!-- Abstract -->
+      <h2 class="title is-3 has-text-centered"><span style="color: #2c6fbc ;font-weight: bolder;">Abstract</span></h2>
+      <!-- <span style="background: linear-gradient(to right, #91A0C9, #4A69BD); -webkit-background-clip: text; color: transparent; font-weight: bolder;">Abstract</span> -->
+      <div class="content has-text-justified">
+        <p>
+      </div>
+      <p class="mb-4">
+        Predicting crash events is crucial for understanding crash distributions and their contributing factors, thereby
+        enabling the design of proactive traffic safety policy interventions. However, existing methods struggle to
+        interpret the complex interplay among various sources of traffic crash data, including numeric characteristics,
+        textual reports, crash imagery, environmental conditions, and driver behavior records. As a result, they often
+        fail to capture the rich semantic information and intricate interrelationships embedded in these diverse data
+        sources, limiting their ability to identify critical crash risk factors. In this research, we propose
+        TrafficSafe, a framework that adapts Large Language Models (LLMs) to reframe crash prediction and feature
+        attribution as text-based reasoning. By integrating multi-modal crash data to improve predictive accuracy,
+        reliability, and interpretability, we develop TrafficSafe Event dataset, a textual traffic crash dataset of
+        58,903 real-world reports (totaling 12.74 million words) linked to infrastructure, environmental, driver, and
+        vehicle information from Washington and Illinois. By customizing and fine-tuning state-of-the-art LLMs on this
+        dataset, TrafficSafe LLM achieves a 42% average improvement in F1-score over baselines across multiple crash
+        prediction tasks, particularly for severe crashes. To interpret these predictions and uncover contributing
+        factors, we introduce TrafficSafe Attribution, a sentence-level feature attribution framework enabling
+        conditional risk analysis. Findings show that alcohol- impaired driving is the leading factor in severe crashes,
+        with aggressive and impairment-related behaviors having nearly twice the contribution for severe crashes
+        compared to other driver behaviors. Furthermore, TrafficSafe Attribution highlights pivotal features during
+        model training, guiding strategic crash data collection for iterative performance improvements. The proposed
+        TrafficSafe offers a transformative leap in traffic safety research based on foundation models, providing a
+        blueprint for translating advanced artificial intelligence technologies into responsible, actionable, and
+        life-saving outcomes. It has the potential to reshape how researchers and policymakers approach road safety. To
+        the best of the authors’ knowledge, this is the first multi-modal traffic crash analysis and feature attribution
+        framework based on LLMs.
+      </p>
+
+
+
+      <!-- Method -->
+      <br>
+      <h2 class="title is-3 has-text-centered"><span style="color: #2c6fbc ;font-weight: bolder;">TrafficSafe Crash
+          Outcomes Prediction Pipeline</span></h2>
+
+      <div class="content has-text-justified">
+        <img src="static/images/fig2.png" class="img-fluid w-100 mt-2 mb-3" alt="comparison on ACID dataset" />
+        <p>
+          TrafficSafe Crash Outcomes Prediction Pipeline. Multi-modal crash data is collected and organized into textual
+          prompts through an AI-expert cooperative process. The satellite images and the HSIS crash data are used to
+          generate general and infrastructure information, including the crash time, location, the road level, and so
+          on. The Police crash reports, crashworthiness data, and driver license data are converted into the event
+          information and the unit information, including vehicle movements, driver characteristics (e.g., age, gender,
+          alcohol use), vehicle attributes (e.g., manufacture year), and so on. TrafficSafe Event dataset is created
+          with three prediction targets: Injury, Severity, and Type. The Injury task predicts the number of people
+          injured in the crash event, the Severity task estimates the severity level of the crash, such as no apparent
+          injury or fatal, and the Type task classifies type of crash, such as "single vehicle with object" or "angle
+          impacts right". The TrafficSafe LLM is fine-tuned using the TrafficSafe Event dataset. To reframe the crash
+          outcomes prediction from a classification task to a language inference task, TrafficSafe LLM is fine-tuned by
+          adding prediction targets as special tokens in its vocabulary and adjusting parameters using LoRA.<br> <br>
+        </p>
+      </div>
+
+
+      <!-- Method -->
+      <br>
+      <h2 class="title is-3 has-text-centered"><span style="color: #2c6fbc ;font-weight: bolder;">Event-level Feature
+          Attribution</span></h2>
+
+      <div class="content has-text-justified">
+        <img src="static/images/sv.png" class="img-fluid w-100 mt-2 mb-3" alt="comparison on ACID dataset" />
+        <p>
+          Single Case Feature Attribution Results for Severity Task. The left part displays the full prompt from
+          Washington, with different colors representing various semantic text sequences. The right part illustrates the
+          feature contribution assigned to each text sequence. Positive contributions signify a supportive role in the
+          model's prediction, whereas negative contributions indicate a detracting influence. The absolute value of
+          these contributions represents the relative importance of each sequence to the model's output.<br> <br>
+        </p>
+      </div>
+
+      <!-- Method -->
+      <br>
+      <h2 class="title is-3 has-text-centered"><span style="color: #2c6fbc ;font-weight: bolder;">Conditional Risk
+          Analysis</span></h2>
+
+      <div class="content has-text-justified">
+        <img src="static/images/fig5.png" class="img-fluid w-100 mt-2 mb-3" alt="comparison on ACID dataset" />
+        <p>
+          Conditional Risk Analysis for the Serious Injury and Fatal Crashes. Higher confidence scores in TrafficSafe
+          LLM’s predictions correspond to greater accuracy, allowing the confidence score (calculated as the sum of
+          feature contributions for all data components) to serve as an indicator of risk for serious and fatal crashes.
+          (a) Feature contributions of five key factors and their proportions relative to all factors are visualized.
+          The inner circle represents the average feature contribution of each factor across different values, while the
+          outer circle shows the percentage share of each factor in the total average feature contribution. The unit for
+          BAC (Blood Alcohol Content) is "mg/L", which is omitted in this figure. (b) Risk levels under various feature
+          combinations are ranked by confidence scores. Each column represents a specific combination of conditions
+          (marked by dark dots) alongside the corresponding feature contribution for each factor. Some combinations are
+          not shown due to insufficient data for visualization. (c) Average feature contribution for each factor under
+          specific values. Bars are marked in pink if the value exceeds the corresponding factor’s average shown in (a)
+          and in blue if it does not. (d) Feature contributions of different data components during the training phase
+          for Washington and Illinois datasets.<br> <br>
+        </p>
+      </div>
+
+      <!-- Comparisons -->
+      <!-- <h2 class="title is-3 has-text-centered"><span style="color: #f06d15 ;font-weight: bolder;">Results</span></h2> -->
+      <!-- <br>
+    <div class="content has-text-justified"> -->
+      <!-- <p>
+        Our method utilizes input images from which pixel-aligned point maps are regressed using a generic Transformer. Point-based scene parameters are then predicted employing another Transformer that facilitates local context aggregation and hierarchical fusion. The model elevate 2D pre-trained feature to facilate consistent 3D feature field. It is supervised end-to-end, minimizing the loss function through comparisons against ground truth and rasterized feature maps on new views. During the inference stage, our approach is capable of predicting the scene representation without requiring camera parameters, enabling real-time semantic 3D reconstruction.<br> <br>
+      </p> -->
+      <!-- </div> -->
+
+      <!-- <div class="columns is-centered">
+      <div class="column">
+        <div class="columns is-centered">
+          <div class="column content">
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/689.mp4"
+              type="video/mp4">
+            </video>
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/705.mp4"
+              type="video/mp4">
+            </video>
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/714.mp4"
+              type="video/mp4">
+            </video>
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/754.mp4"
+              type="video/mp4">
+            </video>
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/755.mp4"
+              type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="column">
+        <br>
+        <div class="columns is-centered">
+          <div class="column content">
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/761.mp4"
+              type="video/mp4">
+            </video>
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/766.mp4"
+              type="video/mp4">
+            </video>
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/781.mp4"
+              type="video/mp4">
+            </video>
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/791.mp4"
+              type="video/mp4">
+            </video>
+            <video id="matting-video" autoplay controls muted playsinline width="19%">
+              <source src="static/videos/797.mp4"
+              type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div> -->
+
+
+      <!-- Footer -->
+      <footer class="border-top mt-5 py-4">
+        <!-- This page's code uses elements from this <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+        target="_blank">Academic Project Page
+        Template</a>.
+    </footer>
+  </div> -->
+</body>
+
+</html>
